@@ -23,3 +23,16 @@ class UserUpdateProfile(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_pic','bio']
+
+class UserUpdate(forms.ModelForm):
+    email = forms.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ['username','email']
+
+class ProjectUpload(forms.ModelForm):
+    
+    class Meta:
+        model = Project
+        fields = ['project_name','project_caption', 'project_image', 'project_url']

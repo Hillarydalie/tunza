@@ -22,12 +22,12 @@ class Profile(models.Model):
     @receiver(post_save, sender= User)
     def save_profile(sender, instance, **kwargs):
         instance.profile.save()
-        
+
 # This is the project model
 class Project(models.Model):
-    project_image = models.ImageField(upload_to="image/")
     project_name = models.CharField(max_length = 100, blank=True)
     project_caption = models.TextField()
+    project_image = models.ImageField(upload_to="projectpics/", blank=True)
     project_url = models.URLField(max_length=200)
     published_date = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
