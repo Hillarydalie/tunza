@@ -1,0 +1,28 @@
+<nav class="navbar navbar-light bg-light navbar-sticky-top">
+    <div class="container-full">
+
+        <ul class="nav justify-content-end">
+
+            <li>
+                <a class="navbar-brand" href="#"> Home</a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="/new">Upload Project</a>
+                </li>
+                <li>
+                    <a href="/logout">Logout</a>
+                </li>
+            {% else %}
+                <li>
+                <a class="navbar-link" href="/login">Login</a>
+                </li>
+                <li>
+                    <a class="navbar-link" href="">Register</a>
+                </li>
+            {% endif %}
+             
+        </ul>
+    </div>`
+</nav>
