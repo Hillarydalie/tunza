@@ -10,13 +10,15 @@
                 <div class="card-header">
                     <h3>{{projo.project_name}}</h3>
                 </div>
-                <img src="{{projo.project_image}}" class="img-responsive card-img-top">
+                <img src="{{projo.project_image.url}}" class="img-responsive card-img-top">
                 <div class="card-body">
                     <p>
                         {{projo.project_caption}}
                     </p>
+                    <a href="/projectdetail/{{projo.id}}">Button</a>
                     <a href="{{projo.project_url}}"></a>
                     <h6>{{projo.published_date}}</h6>
+                    
                 </div>
                 <div class="card-footer">
                     <h8>Published by {{projo.user}}</h8>

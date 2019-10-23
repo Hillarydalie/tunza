@@ -112,3 +112,44 @@ def uploadproject(request):
     return render(request, 'instagram/image_form.html', {"new_project_form":new_project_form}, )
 
 
+def rateproject(request,id):
+
+    if request.method == "POST":
+        rating_form = RatingForm(request.POST)
+        if rating_form.is_valid():
+            design = rating_form.cleaned_data['design']
+            content = rating_form.cleaned_data['content']
+            usability = rating_form.cleaned_data['usability']
+            creativity = rating_form.cleaned_data['creativity']
+            average = (design + content + usability + creativity) / 4
+            rating = Rating(design=design, content=content, usability=usability, creativity=creativity, average=average )
+            rating.user = request.user
+            rating.project = Project.objects.filter(id=id).first()
+            rating.save()
+            return redirect('/')
+    else:
+        rating_form = RatingForm()
+
+def searchresult(request):
+
+    if request.method == "GET":
+        search = request.GET.get('search')
+
+        projects = Project.objects.filter(project_name__icontains=search)
+        users = Profile.objects.filter(user__username__icontains=search)
+
+        return render(request, 'user/searchresult.html', {"projects":projects, "users":users})
+
+
+class profileList(APIView):
+    def get(self, request):
+        profile1 = Profile.objects.all()
+        permission_classes = (IsAdminOrReadOnly,)
+        serializer = profileSerializer(profile1, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self):
+        pass
