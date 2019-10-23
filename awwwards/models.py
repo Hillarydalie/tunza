@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import datetime as dt
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # This is ssthe profile model here
 class Profile(models.Model):
@@ -47,10 +48,10 @@ class Project(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name="ratings")
-    design = models.IntegerField()
-    usability = models.IntegerField()
-    creativity = models.IntegerField()
-    content = models.IntegerField()
+    design = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+    usability = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+    creativity = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+    content = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
     average = models.FloatField()
 
     def __str__(self):
