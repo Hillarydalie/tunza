@@ -130,6 +130,26 @@ def rateproject(request,id):
     else:
         rating_form = RatingForm()
 
+def projectdetail(request, id):
+    project = Project.objects.get(id=id)
+    rating_form = RatingForm()
+    ratings = Rating.objects.filter(project=project).all()
+    if request.method == "POST":
+        rating_form = RatingForm(request.POST)
+        if rating_form.is_valid():
+            design = rating_form.cleaned_data['design']
+            content = rating_form.cleaned_data['content']
+            usability = rating_form.cleaned_data['usability']
+            creativity = rating_form.cleaned_data['creativity']
+            average = (design + content + usability + creativity) / 4
+            rating = Rating(design=design, content=content, usability=usability, creativity=creativity, average=average )
+            rating.user = request.user
+            rating.project = Project.objects.filter(id=id).first()
+            rating.save()
+            return render(request, 'user/projectdetail.html', {"project":project, "rating_form":rating_form, "ratings":ratings})
+    return render(request, 'user/projectdetail.html', {"project":project, "rating_form":rating_form, "ratings":ratings})
+
+
 def searchresult(request):
 
     if request.method == "GET":

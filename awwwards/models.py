@@ -44,3 +44,14 @@ class Project(models.Model):
     def delete_project(self):
         self.delete()
 
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name="ratings")
+    design = models.IntegerField()
+    usability = models.IntegerField()
+    creativity = models.IntegerField()
+    content = models.IntegerField()
+    average = models.FloatField()
+
+    def __str__(self):
+        return f"{self.user.username}'s rating "

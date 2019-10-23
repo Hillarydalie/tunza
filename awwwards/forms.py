@@ -18,3 +18,16 @@ class ProjectUploadForm(forms.ModelForm):
         model = Project
         fields = ['project_image','project_name','project_caption', 'project_url']
 
+class UserUpdateProfile(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['profile_pic','bio']
+
+
+
+class RatingForm(forms.ModelForm):
+    
+    class Meta:
+        model = Rating
+        fields = ['design','usability', 'creativity', 'content']

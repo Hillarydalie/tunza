@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+{% block content %}
+{{block.super}}
+
+    <div class="container">
+        {{project.project_name}}
+        {{project.project_caption}}
+        {{project.project}}
+            {% for rating in ratings %}
+            <div class="">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <blockquote class="blockquote">
+                                    <p class="mb-0">{{rating.user}}</p>
+                                    <footer class="blockquote-footer">{{project.project_url}}</footer>
+                                </blockquote>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Design">{{ rating.design }}</button>
+                                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="top" title="Usability">{{ rating.usability }}</button>
+                                <button type="button" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Creativity">{{ rating.creativity }}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Content">{{ rating.content }}</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-outline-warning btn-md" data-toggle="tooltip" data-placement="top" title="Average Rating">{{ rating.average }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        <form method="POST" action="/projectdetail/{{project.id}}" enctype="multipart/form-data">
+            {% csrf_token %}    
+            {{ rating_form.as_p }}
+
+            <input type="submit" name="" value="Rate Project">
+        </form>
+    </div>
+{% endblock %}
