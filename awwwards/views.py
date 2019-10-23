@@ -4,11 +4,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse,Http404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from django.urls import reverse
-from .forms import SignUpForm, ProjectUploadForm
+from .forms import SignUpForm, ProjectUploadForm, UserUpdateProfile, UserUpdate, ProjectUploadForm, RatingForm
 import datetime as dt
-from .models import Project, Profile
+from .models import Project, Profile, Rating
+from .serializers import profileSerializer
+from .permissions import IsAdminOrReadOnly
 
 # Signup views here.
 def signup(request):
@@ -38,36 +43,39 @@ def signup(request):
 
 # Index views code
 def index(request):
-    return render(request, 'index.html')
+    new_project_form = ProjectUploadForm()
+    project = Project.objects.all()
+    rating_form = RatingForm()
+    return render(request, 'index.html', {"project":project[::-1], "rating_form":rating_form})
 
 
 # Profile views.
 def profile(request):
     current_user = request.user
-    upload_form = ProjectUploadForm()
+    new_project_form = ProjectUploadForm()
     return render(request, 'user/profile.html')
 
 # Upload Project view here
 def newproject(request):
-    upload_form = ProjectUploadForm()
+    new_project_form = ProjectUploadForm()
 
     if request.method == "POST":
-        upload_form = ProjectUploadForm(request.POST,request.FILES)
+        new_project_form = ProjectUploadForm(request.POST,request.FILES)
 
-        if upload_form.is_valid():
+        if new_project_form.is_valid():
             # Grab user form and save to db
-            image = upload_form.save(commit = False)
+            image = new_project_form.save(commit = False)
             image.user = request.user
             image.save()
             return redirect('/')
     else:
-        upload_form = ProjectUploadForm()
+        new_project_form = ProjectUploadForm()
         # profile_form = UserProfileForm()
 
-    return render(request, 'user/newproject.html', {"upload_form":upload_form})
+    return render(request, 'user/newproject.html', {"new_project_form":new_project_form})
 
 # Update profile views here
-def update_profile(request):
+def updateprofile(request):
   if request.method == 'POST':
     user_form = UserUpdateProfile(request.POST,instance=request.user)
     profile_form = UserUpdate(request.POST,request.FILES,instance=request.user.profile)
@@ -83,4 +91,24 @@ def update_profile(request):
     'user_form':user_form,
     'profile_form':profile_form
   }
-  return render(request,'user/update_profile.html',params)
+  return render(request,'user/updateprofile.html',params)
+
+def uploadproject(request):
+    new_project_form = ProjectUploadForm()
+
+    if request.method == "POST":
+        new_project_form = ProjectUploadForm(request.POST,request.FILES)
+
+        if new_project_form.is_valid():
+            # Grab user form and save to db
+            project = new_project_form.save(commit = False)
+            project.user = request.user
+            project.save()
+            return redirect('/')
+    else:
+        new_project_form = ProjectUploadForm()
+        # profile_form = UserProfileForm()
+
+    return render(request, 'instagram/image_form.html', {"new_project_form":new_project_form}, )
+
+
