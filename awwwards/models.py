@@ -31,7 +31,10 @@ class Project(models.Model):
     project_url = models.URLField(max_length=200)
     published_date = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(User, related_name= 'likes', blank=True)
+
+
+    def __str__(self):
+        return f"{self.user.username}'s project "
 
     @classmethod
     def save_project(self):
@@ -40,3 +43,4 @@ class Project(models.Model):
     @classmethod
     def delete_project(self):
         self.delete()
+
