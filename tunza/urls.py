@@ -17,10 +17,15 @@ from django.contrib import admin
 from django.conf.urls import url,include
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from rest_framework.urlpatterns import format_suffix_patterns
+from awwwards import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^login/',auth_views.LoginView.as_view(template_name = 'user/login.html'),name='login'),
     url(r'^logout/',auth_views.LogoutView.as_view(template_name = 'user/logout.html'),name='logout'),
     url(r'', include('awwwards.urls')),
+    path('profiler/', views.profileList.as_view()),
+    url(r'^api-token-auth/', obtain_auth_token)
 ]
