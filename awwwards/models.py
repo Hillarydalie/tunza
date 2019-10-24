@@ -48,10 +48,10 @@ class Project(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name="ratings")
-    design = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-    usability = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-    creativity = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-    content = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+    design = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=0)
+    usability = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=0)
+    creativity = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=0)
+    content = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=0)
     average = models.FloatField()
 
     def __str__(self):
