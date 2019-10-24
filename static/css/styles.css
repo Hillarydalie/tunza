@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand|Raleway&display=swap');
+
+/*
+font-family: 'Quicksand', sans-serif;
+font-family: 'Raleway', sans-serif;
+*/
+
+p {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+/*Navigation Bar*/
+.mynav {
+    height: 85px;
+    background-color: #d0d0d0b5;
+    border-bottom: 1px solid #d0d0d0b5;
+}
+
+.navbar {
+  background-color:  white !important;
+}
+
+.navbar .navbar-brand {
+  font-weight: bolder;
+  color: black;
+  margin-right: 10%;
+}
+
+.navbar .navbar-nav {
+  margin: 0 auto;
+}
+
+.navbar .nav-item a {
+  color: black;
+}
+
+.navbar .dropdown-menu {
+  background-color: rgba(0,0,0,0.3);
+}
+/*End of Navbar*/
+
+/*Carousel*/
+.jumbotron {
+    padding: 0px;
+    margin: 0px 0px 10px 0px;
+    background-image: url(static/images/circle-blues.png);
+}
+
+div#newimage {
+    margin: 0 auto;
+}
+
+blockquote.blockquote.text-center {
+    margin: 0 auto;
+    padding: 20%;
+}
+
+/*.form-inline {
+  margin: 0 auto;
+}*/
+
+
+/*Profile section voting bar*/
+#circleBar {
+  text-align: center;
+  font-family: 'Staatliches', cursive;
+ 
+}
+#circleBar .round {
+  margin-top: 30px;
+  position: relative;
+  margin-bottom: 20px;
+}
+#circleBar .round article {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  transform: translate(-50%);
+  font-size: 15px;
+  color: #212121;
+  font-weight: 100;
+}
+
+#circleBar span {
+  display: block;
+  color: #999;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+#circleBar span i {
+  color: #ff5c5c;
+  font-size: 22px;
+  margin-right: 6px;
+}
+
+
+
+/* Blockquote*/
+.blockquote {
+    margin-bottom: 0px;
+    font-size: 1.25rem;
+}
+
+.col-md-4 {
+    margin-bottom: 0px;
+}
+
+.card.home:hover {
+    background-color: #343a4036;
+}
+
+form.form-inline.p-1 {
+  margin: 0 auto;
+  margin-left: 5%;
+}
+
+input.btn.btn-outline-success.p-2 {
+    margin: 0 auto;
+}
