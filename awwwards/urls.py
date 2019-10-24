@@ -16,7 +16,7 @@ urlpatterns = [
     path('new/', main_views.newproject, name = "newproject"),
     path('profile/', main_views.profile, name="profile"),
     path('updateprofile/',main_views.updateprofile,name='update'),
-    path('rateproject/<id>',main_views.rateproject,name='rateproject'),
+    # path('rateproject/<id>',main_views.rateproject,name='rateproject'),
     path('projectdetail/<id>',main_views.projectdetail,name='projectdetail'),
     path('searchresult/',main_views.searchresult,name='searchresult')
 

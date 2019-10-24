@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^logout/',auth_views.LogoutView.as_view(template_name = 'user/logout.html'),name='logout'),
     url(r'', include('awwwards.urls')),
     path('profiler/', views.profileList.as_view()),
-    url(r'^api-token-auth/', obtain_auth_token)
+    path('projector/', views.projectList.as_view()),
+    # url(r'^api-token-auth/', obtain_auth_token)
 ]
