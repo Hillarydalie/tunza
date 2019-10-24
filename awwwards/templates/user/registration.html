@@ -1,11 +1,23 @@
 {%extends 'base.html'%}
 
- {% block content %}
-<form method="POST" enctype="multipart/formdata">
-    {% csrf_token %}    
-    {{ registration_form.as_p }}
+{% block content %}
+{{block.super}}
 
-    <input type="submit" name="" value="Register">
-</form>
+    <div class="jumbotron">
+        {% if registered %}
+            <h1>Thank you for registering</h1>
+            
 
-{% endblock %}
+        {% else %}
+            <h1>Register Here!</h1>
+            <h3>Fill our the form: </h3>
+
+            <form method="POST" enctype="multipart/formdata">
+                {% csrf_token %}    
+                {{ registration_form.as_p }}
+
+                <input type="submit" name="" value="Register">
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}  

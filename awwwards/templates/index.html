@@ -3,27 +3,59 @@
 
 {% block content %}
 {{block.super}}
-    
-    <div class="container">
-        {% for projo in project %}
-            <div class="card">
-                <div class="card-header">
-                    <h3>{{projo.project_name}}</h3>
-                </div>
-                <img src="{{projo.project_image.url}}" class="img-responsive card-img-top">
-                <div class="card-body">
-                    <p>
-                        {{projo.project_caption}}
-                    </p>
-                    <a href="/projectdetail/{{projo.id}}">Button</a>
-                    <a href="{{projo.project_url}}"></a>
-                    <h6>{{projo.published_date}}</h6>
-                    
-                </div>
-                <div class="card-footer">
-                    <h8>Published by {{projo.user}}</h8>
+
+    <div class="jumbotron" style="background-image: url(static/images/papyrus.png);">
+        <div class="row">
+            <div class="col-md-3">
+                <blockquote class="blockquote text-center">
+                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                  <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+            </div>
+            <div class="col">
+                <div class="card" id="newimage" style="max-width: 768px;">
+                    <img src="static/images/www.jpeg" class="card-img-top">
                 </div>
             </div>
+            <div class="col-md-3">
+                <blockquote class="blockquote text-center">
+                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                  <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-full">
+        <div class="row match-height">
+        {% for projo in project %}
+        <div class="col-md-4">
+            <div class="card home">
+                <a href="/projectdetail/{{projo.id}}">
+                    <img src="{{projo.project_image.url}}" class="img-responsive card-img-top">
+                </a>
+                <div class="card-body">
+                    <h3>{{projo.project_name}}</h3>
+                    <p class="card-text">
+                        {{projo.project_caption}}
+                    </p>
+                    <p>
+                        The live deployed link click 
+                        <a href="{{projo.project_url}}">Here</a>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <p>Published by {{projo.user}}</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p>{{projo.published_date}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
     </div>
 {% endblock %}
