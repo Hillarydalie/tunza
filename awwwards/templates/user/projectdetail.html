@@ -3,41 +3,79 @@
 {% block content %}
 {{block.super}}
 
+
     <div class="container">
-        {{project.project_name}}
-        {{project.project_caption}}
-        {{project.project}}
-        <img src="{{project.project_image.url}}" class="img-responsive">
-            {% for rating in ratings %}
-            <div class="">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <blockquote class="blockquote">
-                                    <p class="mb-0">{{rating.user}}</p>
-                                    <!-- Insert Profile bio here -->
-                                    <footer class="blockquote-footer">{{project.project_url}}</footer>
-                                </blockquote>
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Design">{{ rating.design }}</button>
-                                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="top" title="Usability">{{ rating.usability }}</button>
-                                <button type="button" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Creativity">{{ rating.creativity }}</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Content">{{ rating.content }}</button>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-outline-danger btn-md" data-toggle="tooltip" data-placement="top" title="Average Rating">{{ rating.average }}</button>
+        <div class="card">
+            <div class="card-header">
+                <h3>
+                    {{project.project_name}}
+                </h3>
+            </div>
+            <div class="card-body">
+                <img src="{{project.project_image.url}}" class="card-img-top">
+                <p class="card-text text-center">{{project.project_caption}}</p>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">{{project.published_date}}</p>
+            </div>
+        </div>
+
+        <div class="container rateform">
+            <form method="POST" action="/projectdetail/{{project.id}}" class="form-inline p-1" enctype="multipart/form-data">
+                {% csrf_token %}    
+                {{ rating_form.as_p }}
+                <input class="btn btn-outline-success p-2" type="submit" name="" value="Rate Project">
+            </form>
+        </div>
+
+        <section id="circleBar">
+        <div class="container">
+            <div class="row kura">
+        {% for rating in ratings %}
+            <div class="col-md-6 card-footer text-left">
+                <blockquote class="blockquote">
+                    <p class="mb-0">{{rating.user}}</p>
+                    <!-- Insert Profile bio here -->
+                    <footer class="blockquote-footer">{{project.project_url}}</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-6 card-footer">
+                <div class="row">
+                    <div class="col">
+                        <div class="round" data-value="0.{{ rating.design }}" data-size="40" data-thickness="3" data-toggle="tooltip" data-placement="top" title="Design"> 
+                          <article></article>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="round" data-value="0.{{ rating.usability }}" data-size="40" data-thickness="3" data-toggle="tooltip" data-placement="top" title="Usability"> 
+                          <article></article>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="round" data-value="0.{{ rating.creativity }}" data-size="40" data-thickness="3" data-toggle="tooltip" data-placement="top" title="Creativity"> 
+                          <article></article>
+                        </div>
+                    </div>
+                    <div class="col"> 
+                        <div class="round" data-value="0.{{ rating.content }}" data-size="40" data-thickness="3" data-toggle="tooltip" data-placement="top" title="Content"> 
+                          <article></article>
+                        </div> 
+                    </div>
+                    <div class="col">
+                        <div class="round" data-value="0.{{ rating.design }}" data-size="40" data-thickness="3" data-toggle="tooltip" data-placement="top" title="Average"> 
+                          <article></article>
                         </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+        {% endfor %}
+            </div>
+        </div>
+        </section>
 
-        <form method="POST" action="/projectdetail/{{project.id}}" enctype="multipart/form-data">
-            {% csrf_token %}    
-            {{ rating_form.as_p }}
-            <input type="submit" name="" value="Rate Project">
-        </form>
+        
     </div>
 {% endblock %}
+
+
+

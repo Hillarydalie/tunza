@@ -12,8 +12,8 @@ from django.urls import reverse
 from .forms import SignUpForm, ProjectUploadForm, UserUpdateProfile, UserUpdate, ProjectUploadForm, RatingForm
 import datetime as dt
 from .models import Project, Profile, Rating
-from .serializers import profileSerializer
-from .permissions import IsAdminOrReadOnly
+from .serializers import profileSerializer, projectSerializer
+# from .permissions import IsAdminOrReadOnly
 
 # Signup views here.
 def signup(request):
@@ -146,7 +146,10 @@ def projectdetail(request, id):
             rating.user = request.user
             rating.project = Project.objects.filter(id=id).first()
             rating.save()
-            return render(request, 'user/projectdetail.html', {"project":project, "rating_form":rating_form, "ratings":ratings})
+            return redirect('/')
+    else:
+        rating_form = RatingForm()
+            # return render(request, 'user/projectdetail.html', {"project":project, "rating_form":rating_form, "ratings":ratings})/
     return render(request, 'user/projectdetail.html', {"project":project, "rating_form":rating_form, "ratings":ratings})
 
 
@@ -160,16 +163,16 @@ def searchresult(request):
 
         return render(request, 'user/searchresult.html', {"projects":projects, "users":users})
 
-
 class profileList(APIView):
-    def get(self, request):
-        profile1 = Profile.objects.all()
-        permission_classes = (IsAdminOrReadOnly,)
-        serializer = profileSerializer(profile1, many=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def post(self):
-        pass
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializer = profileSerializer(all_profiles, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class projectList(APIView):
+
+    def get(self, request, format=None):
+        all_projects = Project.objects.all()
+        serializers = projectSerializer(all_projects, many=True)
+        return Response(serializers.data, status=status.HTTP_201_CREATED)
