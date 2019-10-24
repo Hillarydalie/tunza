@@ -28,5 +28,4 @@ urlpatterns = [
     url(r'', include('awwwards.urls')),
     path('profiler/', views.profileList.as_view()),
     path('projector/', views.projectList.as_view()),
-    # url(r'^api-token-auth/', obtain_auth_token)
 ]

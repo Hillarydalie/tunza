@@ -50,12 +50,14 @@ def index(request):
 
 
 # Profile views.
+@login_required
 def profile(request):
     current_user = request.user
     new_project_form = ProjectUploadForm()
     return render(request, 'user/profile.html')
 
 # Upload Project view here
+@login_required
 def newproject(request):
     new_project_form = ProjectUploadForm()
 
@@ -75,6 +77,7 @@ def newproject(request):
     return render(request, 'user/newproject.html', {"new_project_form":new_project_form})
 
 # Update profile views here
+@login_required
 def updateprofile(request):
   if request.method == 'POST':
     user_form = UserUpdateProfile(request.POST,instance=request.user)
@@ -111,7 +114,7 @@ def uploadproject(request):
 
     return render(request, 'instagram/image_form.html', {"new_project_form":new_project_form}, )
 
-
+@login_required
 def rateproject(request,id):
 
     if request.method == "POST":
