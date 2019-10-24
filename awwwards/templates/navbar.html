@@ -3,7 +3,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">AWWWARDS</a>
 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
           
@@ -43,14 +47,16 @@
       </form>
 
         {% else %}
-        <ul class="navbar-nav mr-auto">
-        <li>
-                <a class="navbar-link" href="/login">Login</a>
-                </li>
-                <li>
-                    <a class="navbar-link" href="/register">Register</a>
-                </li>
+        <ul class="navbar-nav mr-auto past">
+          <li>
+              <a class="navbar-link" href="/login">LOGIN</a>
+          </li>
+          <li>
+              <a class="navbar-link" href="/register">REGISTER</a>
+          </li>
         </ul>
          {% endif %}
+
+        </div>
     </nav>
 </div>
