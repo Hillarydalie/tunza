@@ -123,3 +123,28 @@ form.form-inline.p-1 {
 input.btn.btn-outline-success.p-2 {
     margin: 0 auto;
 }
+
+.container.logout {
+    padding-top: 15%;
+    padding-left: 10%;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    margin-top: 12%;
+}
+
+form.form-inline {
+    visibility: hidden;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
