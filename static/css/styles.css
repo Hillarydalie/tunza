@@ -137,7 +137,7 @@ input.btn.btn-outline-success.p-2 {
     margin-top: 12%;
 }
 
-form.form-inline {
+form.form-inline.searchingform {
     visibility: hidden;
 }
 
