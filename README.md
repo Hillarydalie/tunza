@@ -13,7 +13,7 @@ This app that allows users to post their projects and see others posted by other
 
 ## Screenshot
 
-![A screenshot of the app page](https://github.com/Hillarydalie/instant/blob/master/static/localescreenshot.png "App Page")
+![A screenshot of the app page](https://github.com/Hillarydalie/tunza/blob/master/static/images/awards.png "App Page")
 
 ## Getting Started
 
